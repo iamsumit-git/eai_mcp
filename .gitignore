@@ -1,0 +1,22 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# SSL certificates (if you don't want to push them)
+certs/
+
+# VS Code settings
+.vscode/
+
+# Python version file
+.python-version
+
+# OS files
+.DS_Store
