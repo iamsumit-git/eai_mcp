@@ -106,6 +106,30 @@ def fetch_sync_job_management_report(report_name: str) -> dict:
     except Exception as e:
         return {"error": str(e)}
 
+# New tool for POST to CommonService/deleteWorkOrder
+@mcp.tool()
+def deleteWorkOrder(workOrder: str) -> dict:
+    """
+    Deletes a work order from the CommonService endpoint using the given work order name.
+    workOrder: The work order name to include in the payload.
+    """
+    url = "https://eai.int.itservices.lan/oss-core-ws/rest/cmn-adv/CommonService/deleteWorkOrder"
+    payload = {
+        "type": "cmn-adv/commonservice/deleteworkorder",
+        "workOrderName": workOrder
+    }
+    try:
+        response = requests.post(
+            url,
+            json=payload,
+            timeout=10,
+            auth=(BASIC_AUTH_USERNAME, BASIC_AUTH_PASSWORD),
+            verify=False  # Use CA cert from certs directory for SSL verification
+        )
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     # Initialize and run the MCP server
